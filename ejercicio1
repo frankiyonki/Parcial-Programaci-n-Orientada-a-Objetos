@@ -1,0 +1,23 @@
+class Libro:
+    def __init__(self, titulo, autor, anio, editorial, isbn):
+        self.titulo = titulo
+        self.autor = autor
+        self.anio = anio
+        self.editorial = editorial
+        self.isbn = isbn
+
+    def describir(self):
+        print(f"Titulo: {self.titulo}")
+        print(f"Autor: {self.autor}")
+        print(f"Año de publicación: {self.anio}")
+        print(f"Editorial: {self.editorial}")
+        print(f"ISBN: {self.isbn}")
+
+
+# Crear una instancia de la clase Libro
+mi_libro = Libro("Cien años de soledad", "Gabriel García Márquez", 1967, "Sudamericana", "978-987-566-647-4")
+
+# Describir el libro
+mi_libro.describir()
+
+
