@@ -1,0 +1,57 @@
+class Animalia:
+    pass
+
+class Animal(Animalia):
+    pass
+
+class Mamifero(Animalia):
+    pass
+
+class Oviparo(Animalia):
+    pass
+
+class Pollo(Oviparo):
+    pass
+
+class Gato(Mamifero):
+    pass
+
+class Ornitorrinco(Mamifero, Oviparo):
+    pass
+
+
+#Clase Animalia
+# - Propiedades:
+#  - Ninguna
+# - Métodos:
+#   - Ninguno
+
+#Clase Mamifero
+ #- Propiedades:
+  # - Ninguna
+ #- Métodos:
+  # - Ninguno
+
+#Clase Oviparo
+# - Propiedades:
+#   - Ninguna
+# - Métodos:
+#   - Ninguno
+
+#Clase Pollo
+# - Propiedades:
+#   - Ninguna
+# - Métodos:
+#   - Ninguno
+
+#Clase Gato
+# - Propiedades:
+#   - Ninguna
+# - Métodos:
+#   - Ninguno
+
+#Clase Ornitorrinco
+# - Propiedades:
+#   - Ninguna
+# - Métodos:
+#   - Ninguno
