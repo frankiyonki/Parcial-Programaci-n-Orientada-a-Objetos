@@ -1,0 +1,10 @@
+@startuml
+Animal <-- Mamifero
+Animal <-- Oviparo
+
+Oviparo <-- Pollo
+Mamifero <-- Gato
+
+Mamifero <-- Ornitorrinco
+Oviparo <-- Ornitorrinco
+@enduml
