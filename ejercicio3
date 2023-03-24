@@ -1,0 +1,87 @@
+import random
+from datetime import datetime, timedelta
+
+
+class Account:
+    num_accounts = 0
+
+    def __init__(self, name, opened):
+        self.id = Account.num_accounts
+        Account.num_accounts += 1
+        self.name = name
+        self.opened = opened
+        self.account_number = str(random.randint(10 ** 11, 10 ** 12 - 1))
+        self.balance = 10000.0
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Error: insufficient funds.")
+        else:
+            self.balance -= amount
+            print("Withdrew {} from account {}.".format(amount, self.id))
+
+    def deposit(self, amount):
+        self.balance += amount
+        print("Deposited {} into account {}.".format(amount, self.id))
+
+    def transfer(self, destination, amount):
+        if amount > self.balance:
+            print("Error: insufficient funds.")
+        else:
+            self.balance -= amount
+            destination.balance += amount
+            print("Transferred {} from account {} to account {}.".format(amount, self.id, destination.id))
+
+
+class FixedTermAccount(Account):
+
+    def __init__(self, name, opened, expiry):
+        super().__init__(name, opened)
+        self.expiry = expiry
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Error: insufficient funds.")
+        elif datetime.today() < self.expiry:
+            self.balance -= amount * 1.05
+            print("Withdrew {} from account {} (with 5% penalty).".format(amount, self.id))
+        else:
+            self.balance -= amount
+            print("Withdrew {} from account {}.".format(amount, self.id))
+
+
+class VIPAccount(Account):
+
+    def __init__(self, name, opened, max_overdraft):
+        super().__init__(name, opened)
+        self.max_overdraft = max_overdraft
+
+    def withdraw(self, amount):
+        if self.balance - amount < -self.max_overdraft:
+            print("Error: overdraft limit exceeded ({} euros).".format(self.max_overdraft))
+        else:
+            self.balance -= amount
+            print("Withdrew {} from account {}.".format(amount, self.id))
+
+
+def create_account():
+    # Generate random name
+    names = ["Juan", "María", "Pedro", "Ana", "Carlos"]
+    surnames = ["García", "López", "Martínez", "Fernández", "González"]
+    name = random.choice(names) + " " + random.choice(surnames)
+    # Generate random opening date and maturity date
+    opened = datetime.today() - timedelta(days=random.randint(1, 365 * 10))
+    expiry = opened + timedelta(days=random.randint(365, 365 * 10))
+    # Randomly choose type of account to create
+    account_type = random.choice([Account, FixedTermAccount, VIPAccount])
+    # Create account object
+    if account_type == Account:
+        account = Account(name, opened)
+    elif account_type == FixedTermAccount:
+        account = FixedTermAccount(name, opened, expiry)
+    else:
+        account = VIPAccount(name, opened, random.randint(1000, 10000))
+    account.balance = random.uniform(10000.0, 50000.0)
+    return account
+
+
